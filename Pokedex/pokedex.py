@@ -39,7 +39,7 @@ def createTypes(table):
     values = list(zip(*table))[1:]
     keyVals = dict(zip(keys, values))
     for k in keyVals:
-        test[k] = dict(zip(keys, keyVals[k]))
+        keyVals[k] = dict(zip(keys, keyVals[k]))
         switch = {
             '': 1.0,
             '0': 0.0,
@@ -94,6 +94,6 @@ def update():
     types = createTypes(table)
 
     relationships = []
-    for i in range(len(pokemons)):
-        relationships.append(getTypeRelationships(pokemons[i], poketypes))
-    writePokedex(pokemons, poketypes.keys(), relationships)
+    for pokemon in pokemons:
+        relationships.append(getTypeRelationships(pokemon, types))
+    writePokedex(pokemons, types.keys(), relationships)
